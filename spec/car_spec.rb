@@ -23,7 +23,9 @@ describe 'Car' do
 		it 'allows reading for :wheels' do
 			car = Car.new
 			expect(car.wheels).to eq(4)
-		end		
+    end
+
+    it 'allows writing for :doors'
 	end
 
 	describe '.colors' do 
