@@ -3,10 +3,10 @@ require 'car'
 describe 'Car' do
 	describe 'attributes' do
 		it 'allows reading and writing for :make' do
-      skip('Debugging a problem')
+      pending('Debugging a problem') # Pending uses for temporary describing why this test doesn't work, and skip just exit from current test
 			car = Car.new
 			car.make = 'Test'
-			expect(car.make).to eq('Test')
+			expect(car.make).to eq('Tes')
 		end
 
 		it 'allows reading and writing for :year' do
