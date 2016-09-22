@@ -89,4 +89,45 @@ describe 'Expectation Matches' do
       expect(5..10).to cover(9)
     end
   end
+
+  describe 'collection matchers' do
+    it 'will match arrays' do
+      array = [1, 2, 3]
+
+      expect(array).to include(3)
+      expect(array).to include(1, 3)
+
+      expect(array).to start_with(1)
+      expect(array).to end_with(3)
+
+      # for match_array you specify array, but for contain_exactly you specify individual args
+      expect(array).to match_array([2, 1, 3]) # any order
+      expect(array).not_to match_array([2, 1])
+
+      expect(array).to contain_exactly(3, 2, 1) # similar to match_array
+      expect(array).not_to contain_exactly(2, 1) # but use individual args
+    end
+
+    it 'will match strings' do
+      string = 'some string'
+
+      expect(string).to include('ring')
+      expect(string).to include('so', 'ring')
+
+      expect(string).to start_with('so')
+      expect(string).to end_with('ing')
+    end
+
+    it 'will match hashed' do
+      hash = {a: 1, b: 2, c: 3}
+
+      expect(hash).to include(:a)
+      expect(hash).to include(a: 1)
+
+      expect(hash).to include(:a, :c)
+      expect(hash).to include(a: 1, c: 3)
+
+      expect(hash).not_to include({'a' => 1, 'c' => 2}) # Symbol != String
+    end
+  end
 end
