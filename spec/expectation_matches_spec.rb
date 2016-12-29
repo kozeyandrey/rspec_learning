@@ -312,4 +312,22 @@ describe 'Expectation Matches' do
       expect(array.first).to eq('hello') | eq('goodbye')
     end
   end
+
+  describe 'composing matchers' do
+    # some matchers accept matchers as arguments. (new in rspec3)
+
+    it 'will match all collection elements using a matcher' do
+      array = [1, 2, 3]
+      expect(array).to all( be < 5 )
+    end
+
+    it 'will match by sending matchers as arguments to matchers' do
+      string = 'hello'
+      expect {string = 'goodbye'}.to change {string}.from( match(/ll/) ).to( match(/oo/) )
+
+      hash = {a: 1, b: 2, c: 3}
+      expect(hash).to include(a: be_odd, b: be_even, c: be_odd)
+      expect(hash).to include(a: be > 0, b: be_within(2).of(4))
+    end
+  end
 end
